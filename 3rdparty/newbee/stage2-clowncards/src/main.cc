@@ -42,9 +42,8 @@ do{
 
   }
 
-  std::cin >> continueLoop;
-
-}while(continueLoop == y || continueLoop == Y)
+std::cout <<endl;
+}while(0)
 
   return 0;
 }
