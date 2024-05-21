@@ -14,7 +14,9 @@ int main(){
   srand((unsigned int)time(nullptr));
 
   std::string a[4] = {"♠", "♥", "♣", "♦"};
+  char continueLoop = y;
 
+do{
   for(int i = 0 ;i<9;i++){
     if(nums[i] == 0){
       int temp;
@@ -22,7 +24,6 @@ int main(){
       temp = rand()%4;
       suits[i] = a[temp];
     }
-
     for(int x = 0;x<9;x++){
       if(x == i){
         x++;
@@ -37,22 +38,13 @@ int main(){
 
   for(int i = 0; i < 9;i++){
 
-    std::cout << suits[i] << ":" << nums[i] << std::endl;
+    std::cout << suits[i] << ":" << nums[i] << ' ';
 
   }
 
+  std::cin >> continueLoop;
+
+}while(continueLoop == y || continueLoop == Y)
 
   return 0;
 }
-
-// main loop
-
-// 计算分数
-
-// 刷新界面
-
-// 判断输赢
-
-// 整理排序
-
-// 出牌和选择功能
