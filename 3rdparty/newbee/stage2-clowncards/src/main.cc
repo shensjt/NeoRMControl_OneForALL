@@ -20,7 +20,7 @@ int main(){
       int temp;
       nums[i] = 1 + rand()%13;
       temp = rand()%4;
-      suits[i] == a[temp];
+      suits[i] = a[temp];
     }
 
     for(int x = 0;x<9;x++){
