@@ -15,8 +15,6 @@ int main(){
 
   std::string a[4] = {"♠", "♥", "♣", "♦"};
   char continueLoop = y;
-
-do{
   for(int i = 0 ;i<9;i++){
     if(nums[i] == 0){
       int temp;
@@ -41,9 +39,6 @@ do{
     std::cout << suits[i] << ":" << nums[i] << ' ';
 
   }
-
-std::cout <<endl;
-}while(0)
 
   return 0;
 }
