@@ -25,6 +25,7 @@ int main(){
 
     for(int x = 0;x<9;x++){
       if(x = i){
+        x++;
         continue;
       }
       if(nums[i] == nums[x] && suits[i] == suits[x]){
