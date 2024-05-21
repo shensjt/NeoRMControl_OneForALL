@@ -3,6 +3,9 @@
 #include <ctime>
 #include <cstdlib>
 
+#include <vector>
+using namespace std;
+const int N = 1000;
 
 int nums[9] = {0};
 std::string suits[9];
@@ -39,6 +42,8 @@ int main(){
     std::cout << suits[i] << ":" << nums[i] << ' ';
 
   }
-
   return 0;
+
+  
+
 }
