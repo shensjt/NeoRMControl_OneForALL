@@ -24,7 +24,7 @@ int main(){
     }
 
     for(int x = 0;x<9;x++){
-      if(x = i){
+      if(x == i){
         x++;
         continue;
       }
@@ -37,7 +37,7 @@ int main(){
 
   for(int i = 0; i < 9;i++){
 
-    std::cout << suits[i] << ":" << nums[i] << std::endl;;
+    std::cout << suits[i] << ":" << nums[i] << std::endl;
 
   }
 
