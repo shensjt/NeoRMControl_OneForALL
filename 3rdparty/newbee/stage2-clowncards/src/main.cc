@@ -1,6 +1,10 @@
 #include "header.h"
 
 CARD card;
+enum check_window{
+    begin,
+    end
+};
 
 void clearScreen() {
 #ifdef _WIN32
@@ -23,11 +27,15 @@ void test_show(CARD card) {
 
 
 void window() {
-    int show = 0;
+    check_window show = begin;
     switch (show)
     {
 
-    case 1:
+    case begin:
+
+        break;
+
+    case end:
 
         break;
 
@@ -72,7 +80,7 @@ int main(void) {
         window();
         
         // 输入
-        std::cin >> input;
+        std::getline(std::cin,input);
 
         // 输入分析与计算 || 判断胜负 || 调整界面
         if (input == "1") {
