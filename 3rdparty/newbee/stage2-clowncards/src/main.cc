@@ -108,16 +108,14 @@ int main(void) {
             }
 
         // 判定输入数字的范围（具体实际情况还没确定） 全负数，全正数
-            while(true){
-
              if(!iss.eof()){
                 std::cout << "输入错误，请重新输入" << std::endl;
-                break;
+                continue;;
             }
             for(const auto& num : input_int){
                 if(num > 8){
                     std::cout << "输入错误，请重新输入" << std::endl;
-                    break;
+                    continue;
                 }
  
                 // 确保全正 或 全负数                
@@ -131,12 +129,11 @@ int main(void) {
 
                 if(positive && negative){
                     std::cout << "输入错误，请重新输入" << std::endl;
-                    break;
+                    continue;
                 }
 
             }
-            
-        }
+
 
             break;
         }while(true);
