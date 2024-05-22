@@ -67,6 +67,9 @@ int main(void) {
 
     std::srand((unsigned int)time(nullptr));
     std::string input;
+    std::vector<int> input_int;
+
+
     do {
         // 刷新屏幕
         clearScreen();
@@ -80,7 +83,7 @@ int main(void) {
         // 输入
         
 
-        std::vector<int> input_int;
+        
 
         
 
@@ -118,8 +121,8 @@ int main(void) {
         }while(true);
 
 
-        if(input == "1") {
-            card.set_num(0, 1);
+        for(int number : input_int){
+            card.reset_num(number-1);
         }
         // 输入分析与计算 || 判断胜负 || 调整界面
     } while(input != "q");

@@ -41,7 +41,7 @@ public:
         return num[i];
     }
 
-    void set_num(int x,int i) {
-        num[i] = x;
+    void reset_num(int i) {
+        num[i] = 0;
     }
 };
