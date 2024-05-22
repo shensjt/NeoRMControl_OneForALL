@@ -141,6 +141,12 @@ int main(void) {
             card.reset_num(number-1);
         }
 
+        for(int number : input_int){
+            std::cout << number << " " << std::endl;
+        }
+
+
+
 
     } while(input != "q");
 
