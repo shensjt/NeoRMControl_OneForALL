@@ -113,7 +113,7 @@ int main(void) {
             }
             // 判定输入数字的范围（具体实际情况还没确定） 全负数，全正数
             for(const auto& num : input_int){
-                if(num > 8 || num < -8 || num == 0){
+                if(num > 8){
                     std::cout << "输入错误，请重新输入" << std::endl;
                     continue;
                 }
@@ -143,7 +143,7 @@ int main(void) {
             card.reset_num(number-1);
         }
 
-        
+
 
     } while(input != "q");
 
