@@ -1,5 +1,3 @@
-#define _CRT_SECURE_NO_WARNINGS
-
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
@@ -8,7 +6,7 @@
 
 class CARD {
 private:
-    std::string SUIT[4] = { "♠", "♥", "♣", "♦" };
+    std::string SUIT[4] = { "a", "b", "c", "d" };
     int num[9] = { 0 };
     std::string suit[9] = { " " };
 
