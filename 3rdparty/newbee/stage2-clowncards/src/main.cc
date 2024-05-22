@@ -143,6 +143,8 @@ int main(void) {
             card.reset_num(number-1);
         }
 
+        
+
     } while(input != "q");
 
 
