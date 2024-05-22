@@ -6,7 +6,7 @@
 
 class CARD {
 private:
-    std::string SUIT[4] = { "a", "b", "c", "d" };
+    std::string SUIT[4] = { "♠", "♥", "♣", "♦" };
     int num[9] = { 0 };
     std::string suit[9] = { " " };
 
