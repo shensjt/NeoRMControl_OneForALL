@@ -66,9 +66,7 @@ void window() {
 int main(void) {
 
     std::srand((unsigned int)time(nullptr));
-
-    std::string input = "y";
-
+    std::string input;
     do {
         // 刷新屏幕
         clearScreen();
@@ -78,16 +76,53 @@ int main(void) {
 
         // 界面展示
         window();
-        
-        // 输入
-        std::getline(std::cin,input);
 
-        // 输入分析与计算 || 判断胜负 || 调整界面
-        if (input == "1") {
+        // 输入
+        
+
+        std::vector<int> input_int;
+
+        
+
+        do{
+            input_int.clear();
+            std::getline(std::cin,input);
+            std::istringstream iss(input);
+            int number;
+
+            if(input == "q"){
+                break;
+            }
+            while(iss >> number){
+                input_int.push_back(number);
+                char nextchar;
+                if(iss.peek()!=' ' && !iss.eof()){
+                    std::cout << "输入错误，请重新输入" << std::endl;
+                    break; 
+                }
+            }
+
+            if(!iss.eof()){
+                std::cout << "输入错误，请重新输入" << std::endl;
+                continue;
+            }
+            // 判定输入数字的范围（具体实际情况还没确定）
+            for(const auto& num : input_int){
+                if(num <= 0){
+                    std::cout << "输入错误，请重新输入" << std::endl;
+                    continue;
+                }
+            }
+
+            break;
+        }while(true);
+
+
+        if(input == "1") {
             card.set_num(0, 1);
         }
-
-    } while (input != "q");
+        // 输入分析与计算 || 判断胜负 || 调整界面
+    } while(input != "q");
 
 
     return 0;

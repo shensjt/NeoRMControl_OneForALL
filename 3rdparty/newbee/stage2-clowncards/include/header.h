@@ -2,7 +2,8 @@
 #include <ctime>
 #include <cstdlib>
 #include <string>
-
+#include <vector>
+#include <sstream>
 
 class CARD {
 private:
@@ -11,6 +12,7 @@ private:
     std::string suit[9] = { " " };
 
 public:
+    // 设置点数和花色
     void INI_CARD() {
         for (int i = 0; i < 9; i++) {
             if (num[i] == 0) {
