@@ -17,7 +17,7 @@ int main(){
   srand((unsigned int)time(nullptr));
 
   std::string a[4] = {"♠", "♥", "♣", "♦"};
-  char continueLoop = y;
+  char continueLoop = 'y';
   for(int i = 0 ;i<9;i++){
     if(nums[i] == 0){
       int temp;
