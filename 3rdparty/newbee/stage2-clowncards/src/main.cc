@@ -28,7 +28,7 @@ void test_show(CARD card) {
 
 void window() {
     check_window show = begin;
-    switch (show)
+    switch (3)
     {
 
     case begin:
