@@ -54,7 +54,6 @@ void window() {
             std::cout << i+1;
         }
         std::cout << std::endl;
-        break;
     }
 
 
@@ -79,6 +78,9 @@ int main(void) {
 
         // 界面展示
         window();
+        for(int number : input_int){
+            std::cout << number << " " << std::endl;
+        }
 
         // 输入
         
@@ -140,13 +142,6 @@ int main(void) {
         for(int number : input_int){
             card.reset_num(number-1);
         }
-
-        for(int number : input_int){
-            std::cout << number << " " << std::endl;
-        }
-
-
-
 
     } while(input != "q");
 
