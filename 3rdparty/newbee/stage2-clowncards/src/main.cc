@@ -100,7 +100,6 @@ int main(void) {
             }
             while(iss >> number){
                 input_int.push_back(number);
-                char nextchar;
                 if(iss.peek()!=' ' && !iss.eof()){
                     std::cout << "输入错误，请重新输入" << std::endl;
                     break; 
