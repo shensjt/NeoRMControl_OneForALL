@@ -17,7 +17,7 @@ void clearScreen() {
 
 void test_show(CARD card) {
 
-    for (int i = 0; i < 9; i++) {
+    for (int i = 0; i < 8; i++) {
 
         std::cout << card.get_suit(i) << ":" << card.get_num(i) << "  ";
 
@@ -45,12 +45,12 @@ void window() {
         std::cout << "剩余出牌次数：" << std::endl;
         std::cout << "当前分数："<<"             "<< "目标分数" << std::endl;
         std::cout << "当前手牌：";
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 8; i++) {
             std::cout << card.get_suit(i) << card.get_num(i) << " ";
         }
         std::cout << std::endl;
         std::cout << "序号：";
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 8; i++) {
             std::cout << i+1;
         }
         std::cout << std::endl;
@@ -109,22 +109,39 @@ int main(void) {
                 std::cout << "输入错误，请重新输入" << std::endl;
                 continue;
             }
-            // 判定输入数字的范围（具体实际情况还没确定）
+            // 判定输入数字的范围（具体实际情况还没确定） 全负数，全正数
             for(const auto& num : input_int){
-                if(num <= 0){
+                if(num > 8 || num < -8 || num == 0){
                     std::cout << "输入错误，请重新输入" << std::endl;
                     continue;
                 }
+ 
+                // 确保全正 或 全负数                
+                bool positive = false;
+                bool negative = false;
+                if(num > 0){
+                    positive = true;
+                }else{ // 0 在之前已经排除过
+                    negative = true;
+                }
+
+                if(positive && negative){
+                    std::cout << "输入错误，请重新输入" << std::endl;
+                    continue;
+                }
+
             }
 
             break;
         }while(true);
 
 
+        // 输入分析与计算 || 判断胜负 || 调整界面
         for(int number : input_int){
             card.reset_num(number-1);
         }
-        // 输入分析与计算 || 判断胜负 || 调整界面
+
+
     } while(input != "q");
 
 
