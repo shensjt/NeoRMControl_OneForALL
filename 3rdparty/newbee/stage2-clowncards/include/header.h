@@ -44,8 +44,8 @@ void test_show(CARD card){
 
     for(int i ;i<9;i++){
 
-        std::cout << card.get_suit(i) << ":" << card.get_num() <<std::endl ;
-        
+        std::cout << card.get_suit(i) << ":" << card.get_num(i) <<std::endl ;
+
     }
 
 }
