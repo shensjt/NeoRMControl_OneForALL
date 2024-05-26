@@ -90,6 +90,7 @@ int main(void) {
         
 
         do{
+            bool check_isinput = true;
             input_int.clear();
             std::getline(std::cin,input);
             std::istringstream iss(input);
@@ -101,20 +102,19 @@ int main(void) {
             while(iss >> number){
                 input_int.push_back(number);
                 if(iss.peek()!=' ' && !iss.eof()){
-                    std::cout << "输入错误，请重新输入" << std::endl;
+                    check_isinput = false;
                     break; 
                 }
             }
 
         // 判定输入数字的范围（具体实际情况还没确定） 全负数，全正数
              if(!iss.eof()){
-                std::cout << "输入错误，请重新输入" << std::endl;
-                continue;;
+                 check_isinput = false;;
             }
             for(const auto& num : input_int){
                 if(num > 8){
-                    std::cout << "输入错误，请重新输入" << std::endl;
-                    continue;
+                    check_isinput = false;
+                    break;
                 }
  
                 // 确保全正 或 全负数                
@@ -127,13 +127,17 @@ int main(void) {
                 }
 
                 if(positive && negative){
-                    std::cout << "输入错误，请重新输入" << std::endl;
-                    continue;
+                    check_isinput = false;
                 }
 
             }
 
 
+
+            if(check_isinput = false){
+                std::cout << "输入错误，请重新输入" << std::endl;
+                continue;
+            }
             break;
         }while(true);
 
