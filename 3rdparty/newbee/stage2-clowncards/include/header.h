@@ -8,7 +8,7 @@
 class CARD {
 private:
     const std::string SUIT[4] = { "♠", "♥", "♣", "♦" };
-    const std::string NUM[14] = {"0", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
+    const char NUM[14] = {'0', 'A', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'};
     const std::string JOKER[1] = {"灰色小丑"}; 
     
     int num[8] = { 0 };
@@ -54,11 +54,17 @@ public:
     std::string get_suit(int i) {
         return suit[i];
     }
-    std::string get_num(int i) {
+    char get_num(int i) {
         return NUM[num[i]];
     }
     int get_score(){
         return score;
+    }
+
+
+    // 选择卡牌
+    void reset_num(int i) {
+        num[i] = 0;
     }
 
     //  清空分数
@@ -69,14 +75,6 @@ public:
     void reset_discard(){
         discard_suit.clear();
         discard_num.clear();
-    }
-
-    // 选择卡牌 与 增加废牌区 
-    void pick_card_and_add_discard(const std::vector<int>& input_int){
-        for(int i : input_int){
-            
-            num[i] = 0;
-        }
     }
 }card;
 
@@ -126,7 +124,7 @@ void input_get(std::vector<int>& input_int, std::string& input){
             }
 
             if (!iss.eof()) {
-                check_isinput = false;
+                check_isinput = false;;
             }
 
             if(check_isinput == false){
@@ -137,7 +135,10 @@ void input_get(std::vector<int>& input_int, std::string& input){
             break;
         }
         // 输入分析与计算 || 判断胜负 || 调整界面
-        card.pick_card_and_add_discard(input_int);
+        for(int number : input_int){
+            card.reset_num(number-1);
+        }
+
 }
 
 
@@ -181,11 +182,13 @@ void window() {
         }
         std::cout << std::endl;
     }
+
+
 }
 //_______________________________________________
 void calculate(const std::vector<int>& input_int){
 
-    for(int i : input_int ){
+    for(int number : input_int ){
 
 
 
