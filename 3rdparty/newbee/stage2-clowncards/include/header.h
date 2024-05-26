@@ -7,6 +7,7 @@
 
 
 
+
 class CARD {
 private:
     const std::string SUIT[4] = { "♠", "♥", "♣", "♦" };
@@ -78,20 +79,6 @@ public:
         discard_suit.clear();
         discard_num.clear();
     }
-
-    void pick_card_and_add_discard(const std::vector<int>& input_int){
-        for(int i : input_int){
-            discard_suit.push_back(suit[i-1]);
-            discard_num.push_back(num[i-1]);
-            card.reset_num(i-1);
-        }
-    }
-
-    void test(){
-        for(int i : discard_num.size()){
-            std::cout << discard_suit[i] << ":" << discard_num[i] << " ";
-        }
-    }
 }card;
 
 // 输入_________________________________________
@@ -151,7 +138,9 @@ void input_get(std::vector<int>& input_int, std::string& input){
             break;
         }
         // 输入分析与计算 || 判断胜负 || 调整界面
-        pick_card_and_add_discard(input_int);
+        for(int number : input_int){
+            card.reset_num(number-1);
+        }
 
 }
 
@@ -195,8 +184,6 @@ void window() {
             std::cout << i+1;
         }
         std::cout << std::endl;
-
-        card.test();
     }
 
 
