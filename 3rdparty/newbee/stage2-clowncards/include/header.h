@@ -14,7 +14,6 @@ private:
     int num[8] = { 0 };
     std::string suit[8] = { " " };
 
-public:
     std::vector<int> discard_num; // 暂存已经出现的牌 （需要清空的方法）
     std::vector<std::string> discard_suit;
 
@@ -182,9 +181,6 @@ void window() {
             std::cout << i+1;
         }
         std::cout << std::endl;
-        for(size_t x = 0; x < card.discard_num.size() ;x++){
-            std::cout << card.discard_suit[x] << ":" << card.discard_num[x] << "  ";
-        }
     }
 }
 //_______________________________________________
