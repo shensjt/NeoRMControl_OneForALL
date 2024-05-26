@@ -17,8 +17,8 @@ private:
     int num[8] = { 0 };
     std::string suit[8] = { " " };
 
-    std::vector<int> discard_num = {0}; // 暂存已经出现的牌 （需要清空的方法）
-    std::vector<std::string> discard_suit = {"0"};
+    std::vector<int> discard_num; // 暂存已经出现的牌 （需要清空的方法）
+    std::vector<std::string> discard_suit;
 
     int score;
 public:
