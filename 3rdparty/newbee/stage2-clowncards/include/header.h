@@ -7,7 +7,10 @@
 
 class CARD {
 private:
-    std::string SUIT[4] = { "♠", "♥", "♣", "♦" };
+    const std::string SUIT[4] = { "♠", "♥", "♣", "♦" };
+    const char NUM[14] = {'0', 'A', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'};
+    const std::string JOKER[1] = {"灰色小丑"}; 
+    
     int num[8] = { 0 };
     std::string suit[8] = { " " };
 
@@ -19,10 +22,21 @@ public:
     // 设置点数和花色
     void INI_CARD() {
         for (int i = 0; i < 8; i++) {
+
+
             if (num[i] == 0) {
                 num[i] = 1 + rand() % 13;
                 int temp = rand() % 4;
                 suit[i] = SUIT[temp];
+                // 废牌区
+                for(size_t x = 0; x < discard_num.size() ;i++){
+                    if(discard_num[x] == num[i] && discard_suit[x] == suit[i]){
+                        num[i] = 0;
+                        i = i - 1;
+                    }
+                }
+
+                // 自身不重复
                 for (int x = 0; x < 8; x++) {
                     if (x == i) {
                         continue;
@@ -34,8 +48,8 @@ public:
                 }
             }
         }
-
     }
+
     // 拿取内部数据
     std::string get_suit(int i) {
         return suit[i];
@@ -139,6 +153,8 @@ void clearScreen() {
 }
 //窗口________________________________________
 void window() {
+
+
     switch (3)
     {
 
