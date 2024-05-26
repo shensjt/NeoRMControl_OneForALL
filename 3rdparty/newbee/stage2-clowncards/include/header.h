@@ -54,8 +54,8 @@ public:
     std::string get_suit(int i) {
         return suit[i];
     }
-    int get_num(int i) {
-        return num[i];
+    char get_num(int i) {
+        return NUM[num[i]];
     }
     int get_score(){
         return score;
