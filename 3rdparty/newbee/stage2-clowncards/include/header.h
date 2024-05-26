@@ -135,7 +135,7 @@ void input_get(std::vector<int>& input_int, std::string& input){
                 continue;
             }
 
-            card.pick_card_and_add_discard();
+            card.pick_card_and_add_discard(input_int);
 
             break;
         }
