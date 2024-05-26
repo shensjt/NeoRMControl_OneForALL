@@ -203,6 +203,9 @@ void window() {
         }
         std::cout << std::endl;
 
+        // test
+        card.test();
+
     }
 
 
