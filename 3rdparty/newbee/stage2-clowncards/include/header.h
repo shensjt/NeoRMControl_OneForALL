@@ -127,7 +127,7 @@ void input_get(std::vector<int>& input_int, std::string& input){
             }
 
             if (!iss.eof()) {
-                check_isinput = false;;
+                check_isinput = false;
             }
 
             if(check_isinput == false){
