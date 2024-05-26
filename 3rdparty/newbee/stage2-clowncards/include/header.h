@@ -64,9 +64,68 @@ public:
     }
 }card;
 
-//_________________________________________
+// 输入_________________________________________
 
+void input_get(std::vector<int>& input_int, std::string& input){
 
+    while(true){
+            bool positive = false;
+            bool negative = false;
+            bool check_isinput = true;
+            input_int.clear();
+            std::getline(std::cin, input);
+            std::istringstream iss(input);
+            int number;
+
+            if (input == "q") {
+            break;
+            }
+            
+            while (iss >> number) {
+                input_int.push_back(number);
+
+            // 判定输入数字的范围（具体实际情况还没确定） 全负数，全正数
+                if (number > 8) {
+                    check_isinput = false;
+                    break;
+                }
+
+            // 确保全正 或 全负数
+                if (number > 0) {
+                    positive = true;
+                }
+                else { // 0 在之前已经排除过
+                    negative = true;
+                }
+
+                if (positive && negative) {
+                    check_isinput = false;
+                    break;
+                }
+
+                if (iss.peek() != ' ' && !iss.eof()) {
+                    check_isinput = false;
+                    break;
+                }
+            }
+
+            if (!iss.eof()) {
+                check_isinput = false;;
+            }
+
+            if(check_isinput == false){
+                std::cout << "输入错误，请重新输入" << std::endl;
+                continue;
+            }
+
+            break;
+        }
+        // 输入分析与计算 || 判断胜负 || 调整界面
+        for(int number : input_int){
+            card.reset_num(number-1);
+        }
+
+}
 
 
 
@@ -78,7 +137,7 @@ void clearScreen() {
     std::cout.flush();
 #endif
 }
-//___________________________________________
+//窗口________________________________________
 void window() {
     switch (3)
     {
@@ -111,8 +170,15 @@ void window() {
 
 }
 //_______________________________________________
-void calculate(const std::vector<int>& intput_int){
+void calculate(const std::vector<int>& input_int){
+
+    for(int number : input_int ){
 
 
+
+
+
+
+    }
 
 }
