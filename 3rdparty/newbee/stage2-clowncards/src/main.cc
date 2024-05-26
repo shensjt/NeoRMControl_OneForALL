@@ -96,27 +96,17 @@ int main(void) {
             
             while (iss >> number) {
                 input_int.push_back(number);
-                if (iss.peek() != ' ' && !iss.eof()) {
-                    check_isinput = false;
-                    break;
-                }
-            }
 
             // 判定输入数字的范围（具体实际情况还没确定） 全负数，全正数
-            if (!iss.eof()) {
-                check_isinput = false;;
-            }
-
-            for (const auto& num : input_int) {
-                if (num > 8) {
+                if (number > 8) {
                     check_isinput = false;
                     break;
                 }
 
-            // 确保全正 或 全负数                
+            // 确保全正 或 全负数
                 bool positive = false;
                 bool negative = false;
-                if (num > 0) {
+                if (number > 0) {
                     positive = true;
                 }
                 else { // 0 在之前已经排除过
@@ -125,15 +115,28 @@ int main(void) {
 
                 if (positive && negative) {
                     check_isinput = false;
+                    break;
                 }
+
+                if (iss.peek() != ' ' && !iss.eof()) {
+                    check_isinput = false;
+                    break;
+                }
+            }
+
+            if (!iss.eof()) {
+                check_isinput = false;;
             }
 
             if(check_isinput == false){
                 std::cout << "输入错误，请重新输入" << std::endl;
                 continue;
             }
+
             break;
         }
+
+        
 
         // 输入分析与计算 || 判断胜负 || 调整界面
         for(int number : input_int){
