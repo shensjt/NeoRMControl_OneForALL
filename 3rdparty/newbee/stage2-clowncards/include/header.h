@@ -7,12 +7,9 @@
 
 class CARD {
 private:
-    const std::string SUIT[4] = { "♠", "♥", "♣", "♦" };
-    const std::string NUM[13] = {"A","2","3","4","5","6","7","8","9","10","J","Q","K"};
-    
-    int CARDS_SUIT[8] = {0};
-    int CARDS_NUM[8] = {0};
-
+    std::string SUIT[4] = { "♠", "♥", "♣", "♦" };
+    int num[8] = { 0 };
+    std::string suit[8] = { " " };
 
     std::vector<int> discard_num; // 暂存已经出现的牌 （需要清空的方法）
     std::vector<std::string> discard_suit;
@@ -21,20 +18,30 @@ private:
 public:
     // 设置点数和花色
     void INI_CARD() {
-            for(int i = 0; i<8 ;i++){
-                
-
-
-
+        for (int i = 0; i < 8; i++) {
+            if (num[i] == 0) {
+                num[i] = 1 + rand() % 13;
+                int temp = rand() % 4;
+                suit[i] = SUIT[temp];
+                for (int x = 0; x < 8; x++) {
+                    if (x == i) {
+                        continue;
+                    }
+                    if (num[i] == num[x] && suit[i] == suit[x]) {
+                        num[i] = 0;
+                        i = i - 1;
+                    }
+                }
             }
         }
 
+    }
     // 拿取内部数据
     std::string get_suit(int i) {
-        return SUIT[ CARDS_SUIT[i] ];
+        return suit[i];
     }
-    std::string get_num(int i) {
-        return NUM[ CARDS_NUM[i] ];
+    int get_num(int i) {
+        return num[i];
     }
     int get_score(){
         return score;
@@ -43,7 +50,7 @@ public:
 
     // 选择卡牌
     void reset_num(int i) {
-        CARDS_NUM[i] = 0;
+        num[i] = 0;
     }
 
     //  清空分数
