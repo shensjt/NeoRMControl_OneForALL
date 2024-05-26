@@ -87,6 +87,13 @@ public:
 
     }
 
+    //test
+    void test(){
+        for(size_t i = 0 ;i < discard_num.size() ;i++){
+            std::cout << discard_suit[i] << ":" << discard_num[i] << " ";
+        }
+    }
+
 }card;
 
 // 输入_________________________________________
@@ -195,6 +202,7 @@ void window() {
             std::cout << i+1;
         }
         std::cout << std::endl;
+
     }
 
 
