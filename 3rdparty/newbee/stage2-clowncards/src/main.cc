@@ -84,6 +84,8 @@ int main(void) {
         // 输入
 
         while(true){
+            bool positive = false;
+            bool negative = false;
             bool check_isinput = true;
             input_int.clear();
             std::getline(std::cin, input);
@@ -104,8 +106,6 @@ int main(void) {
                 }
 
             // 确保全正 或 全负数
-                bool positive = false;
-                bool negative = false;
                 if (number > 0) {
                     positive = true;
                 }
@@ -136,7 +136,7 @@ int main(void) {
             break;
         }
 
-        
+
 
         // 输入分析与计算 || 判断胜负 || 调整界面
         for(int number : input_int){
