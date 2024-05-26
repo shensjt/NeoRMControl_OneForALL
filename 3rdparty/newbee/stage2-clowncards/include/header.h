@@ -5,10 +5,12 @@
 #include <vector>
 #include <sstream>
 
+
+
 class CARD {
 private:
     const std::string SUIT[4] = { "♠", "♥", "♣", "♦" };
-    const char NUM[14] = {'0', 'A', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'};
+    const std::string NUM[14] = {"0", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
     const std::string JOKER[1] = {"灰色小丑"}; 
     
     int num[8] = { 0 };
@@ -54,7 +56,7 @@ public:
     std::string get_suit(int i) {
         return suit[i];
     }
-    char get_num(int i) {
+    std::string get_num(int i) {
         return NUM[num[i]];
     }
     int get_score(){
