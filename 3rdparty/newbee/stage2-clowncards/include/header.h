@@ -14,6 +14,7 @@ private:
     int num[8] = { 0 };
     std::string suit[8] = { " " };
 
+public:
     std::vector<int> discard_num; // 暂存已经出现的牌 （需要清空的方法）
     std::vector<std::string> discard_suit;
 
@@ -61,12 +62,6 @@ public:
         return score;
     }
 
-
-    // 选择卡牌
-    void reset_num(int i) {
-        num[i] = 0;
-    }
-
     //  清空分数
     void reset_score(){
         score = 0;
@@ -75,6 +70,15 @@ public:
     void reset_discard(){
         discard_suit.clear();
         discard_num.clear();
+    }
+
+    // 选择卡牌 与 增加废牌区 
+    void add_discard(std::vector<int>& input_int){
+        for(int i : input_int){
+            discard_num.push_back(num[i]);
+            discard_suit.push_back(suit[i]);
+            num[i] = 0;
+        }
     }
 }card;
 
@@ -135,9 +139,6 @@ void input_get(std::vector<int>& input_int, std::string& input){
             break;
         }
         // 输入分析与计算 || 判断胜负 || 调整界面
-        for(int number : input_int){
-            card.reset_num(number-1);
-        }
 
 }
 
@@ -181,14 +182,15 @@ void window() {
             std::cout << i+1;
         }
         std::cout << std::endl;
+        for(size_t x = 0; x < card.discard_num.size() ;x++){
+            std::cout << card.discard_suit[x] << ":" << card.discard_num[x] << "  ";
+        }
     }
-
-
 }
 //_______________________________________________
 void calculate(const std::vector<int>& input_int){
 
-    for(int number : input_int ){
+    for(int i : input_int ){
 
 
 
