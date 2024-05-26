@@ -22,9 +22,11 @@ void test_show(CARD card) {
 int main(void) {
 
     std::srand((unsigned int)time(nullptr));
-    std::vector<int> input_int;
-    std::string input;
+    std::vector<int> input_int; // 输入值处理后得到整数
+    std::string input; // 输入的存放
     do{
+        card.reset_discard();
+        card.reset_score();
     do{
         // 刷新屏幕
         clearScreen();

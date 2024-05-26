@@ -11,6 +11,10 @@ private:
     int num[8] = { 0 };
     std::string suit[8] = { " " };
 
+    std::vector<int> discard_num; // 暂存已经出现的牌 （需要清空的方法）
+    std::vector<std::string> discard_suit;
+
+    int score;
 public:
     // 设置点数和花色
     void INI_CARD() {
@@ -32,19 +36,39 @@ public:
         }
 
     }
-
+    // 拿取内部数据
     std::string get_suit(int i) {
         return suit[i];
     }
-
     int get_num(int i) {
         return num[i];
     }
+    int get_score(){
+        return score;
+    }
 
+
+    // 选择卡牌
     void reset_num(int i) {
         num[i] = 0;
     }
+
+    //  清空分数
+    void reset_score(){
+        score = 0;
+    }
+    // 清空废牌区
+    void reset_discard(){
+        discard_suit.clear();
+        discard_num.clear();
+    }
 }card;
+
+//_________________________________________
+
+
+
+
 
 void clearScreen() {
 #ifdef _WIN32
@@ -54,7 +78,7 @@ void clearScreen() {
     std::cout.flush();
 #endif
 }
-
+//___________________________________________
 void window() {
     switch (3)
     {
@@ -71,7 +95,7 @@ void window() {
         std::cout << "__________________" << std::endl;
         std::cout << "目前拥有的小丑牌：" << std::endl;
         std::cout << "剩余出牌次数：" << std::endl;
-        std::cout << "当前分数："<<"             "<< "目标分数" << std::endl;
+        std::cout << "当前分数："<< card.get_score() <<"             "<< "目标分数" << std::endl;
         std::cout << "当前手牌：";
         for (int i = 0; i < 8; i++) {
             std::cout << card.get_suit(i) << card.get_num(i) << " ";
@@ -83,6 +107,12 @@ void window() {
         }
         std::cout << std::endl;
     }
+
+
+}
+//_______________________________________________
+void calculate(const std::vector<int>& intput_int){
+
 
 
 }
