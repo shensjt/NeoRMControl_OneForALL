@@ -1,19 +1,11 @@
 #include "header.h"
 
-CARD card;
+
 enum check_window{
     begin,
     end
 };
 
-void clearScreen() {
-#ifdef _WIN32
-    system("cls");
-#else
-    std::cout << "\033[2J\033[1;1H";
-    std::cout.flush();
-#endif
-}
 
 void test_show(CARD card) {
 
@@ -26,38 +18,7 @@ void test_show(CARD card) {
 }
 
 
-void window() {
-    check_window show = begin;
-    switch (3)
-    {
 
-    case begin:
-
-        break;
-
-    case end:
-
-        break;
-
-    default:
-        std::cout << "__________________" << std::endl;
-        std::cout << "目前拥有的小丑牌：" << std::endl;
-        std::cout << "剩余出牌次数：" << std::endl;
-        std::cout << "当前分数："<<"             "<< "目标分数" << std::endl;
-        std::cout << "当前手牌：";
-        for (int i = 0; i < 8; i++) {
-            std::cout << card.get_suit(i) << card.get_num(i) << " ";
-        }
-        std::cout << std::endl;
-        std::cout << "序号：";
-        for (int i = 0; i < 8; i++) {
-            std::cout << i+1;
-        }
-        std::cout << std::endl;
-    }
-
-
-}
 
 
 
