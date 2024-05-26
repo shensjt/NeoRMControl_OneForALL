@@ -134,12 +134,10 @@ void input_get(std::vector<int>& input_int, std::string& input){
                 continue;
             }
 
-            card.pick_card_and_add_discard(input_int);
-
             break;
         }
         // 输入分析与计算 || 判断胜负 || 调整界面
-
+        card.pick_card_and_add_discard(input_int);
 }
 
 
