@@ -69,6 +69,12 @@ public:
     void reset_num(int i) {
         num[i] = 0;
     }
+    // 增加弃牌区
+    void add_discard(int i){
+        discard_num.push_back(num[i]);
+        discard_suit.push_back(suit[i]);
+
+    }
 
     //  清空分数
     void reset_score(){
@@ -127,7 +133,7 @@ void input_get(std::vector<int>& input_int, std::string& input){
             }
 
             if (!iss.eof()) {
-                check_isinput = false;;
+                check_isinput = false;
             }
 
             if(check_isinput == false){
@@ -139,8 +145,12 @@ void input_get(std::vector<int>& input_int, std::string& input){
         }
         // 输入分析与计算 || 判断胜负 || 调整界面
         for(int number : input_int){
+            card.add_discard(number-1);
             card.reset_num(number-1);
+            
         }
+
+
 
 }
 
