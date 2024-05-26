@@ -1,10 +1,6 @@
 #include "header.h"
+// card在头文件中定义
 
-
-enum check_window{
-    begin,
-    end
-};
 
 
 void test_show(CARD card) {
@@ -28,8 +24,8 @@ int main(void) {
     std::srand((unsigned int)time(nullptr));
     std::vector<int> input_int;
     std::string input;
-
-    do {
+    do{
+    do{
         // 刷新屏幕
         clearScreen();
 
@@ -98,8 +94,8 @@ int main(void) {
         }
 
 
-
         // 输入分析与计算 || 判断胜负 || 调整界面
+
         for(int number : input_int){
             card.reset_num(number-1);
         }
@@ -108,6 +104,8 @@ int main(void) {
 
     } while(input != "q");
 
+
+    }while(input != "q" ); // 重复游戏选项（未完成）
 
     return 0;
 }
