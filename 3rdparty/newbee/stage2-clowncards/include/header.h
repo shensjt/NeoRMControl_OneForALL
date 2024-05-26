@@ -82,8 +82,14 @@ public:
     void pick_card_and_add_discard(const std::vector<int>& input_int){
         for(int i : input_int){
             discard_suit.push_back(suit[i-1]);
-            discard_suit.push_back(num[i-1]);
+            discard_num.push_back(num[i-1]);
             card.reset_num(i-1);
+        }
+    }
+
+    void test(){
+        for(int i : discard_num.size()){
+            std::cout << discard_suit[i] << ":" << discard_num[i] << " ";
         }
     }
 }card;
@@ -190,7 +196,7 @@ void window() {
         }
         std::cout << std::endl;
 
-
+        card.test();
     }
 
 
