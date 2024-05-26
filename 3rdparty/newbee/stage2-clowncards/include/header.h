@@ -74,8 +74,7 @@ public:
     // 选择卡牌 与 增加废牌区 
     void pick_card_and_add_discard(const std::vector<int>& input_int){
         for(int i : input_int){
-            discard_num.push_back(num[i]);
-            discard_suit.push_back(suit[i]);
+            
             num[i] = 0;
         }
     }
