@@ -32,7 +32,7 @@ public:
                 int temp = rand() % 4;
                 suit[i] = SUIT[temp];
                 // 废牌区
-                for(size_t x = 0; x < discard_num.size() ;i++){
+                for(size_t x = 0; x < discard_num.size() ;x++){
                     if(discard_num[x] == num[i] && discard_suit[x] == suit[i]){
                         num[i] = 0;
                         i = i - 1;
@@ -79,6 +79,14 @@ public:
         discard_suit.clear();
         discard_num.clear();
     }
+
+    // 增加弃牌区
+    void add_discard(int i){
+        discard_num.push_back(num[i]);
+        discard_suit.push_back(suit[i]);
+
+    }
+
 }card;
 
 // 输入_________________________________________
@@ -139,6 +147,7 @@ void input_get(std::vector<int>& input_int, std::string& input){
         }
         // 输入分析与计算 || 判断胜负 || 调整界面
         for(int number : input_int){
+            card.add_discard(number-1);
             card.reset_num(number-1);
         }
 
