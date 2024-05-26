@@ -72,7 +72,7 @@ public:
     }
 
     // 选择卡牌 与 增加废牌区 
-    void add_discard(std::vector<int>& input_int){
+    void pick_card_and_add_discard(std::vector<int>& input_int){
         for(int i : input_int){
             discard_num.push_back(num[i]);
             discard_suit.push_back(suit[i]);
@@ -134,6 +134,8 @@ void input_get(std::vector<int>& input_int, std::string& input){
                 std::cout << "输入错误，请重新输入" << std::endl;
                 continue;
             }
+
+            pick_card_and_add_discard();
 
             break;
         }
