@@ -25,8 +25,8 @@ int main(void) {
     std::vector<int> input_int; // 输入值处理后得到整数
     std::string input; // 输入的存放
     do{
-        card.newgame(); // 初始化基本设置
-        
+        card.newgame(); // 初始化基本设置,!!!!应该在小一轮结束后清楚
+
     do{
         // 刷新屏幕
         clearScreen();
@@ -35,7 +35,7 @@ int main(void) {
         card.INI_CARD();
 
         // 界面展示
-        window();
+        card.window();
         for(int number : input_int){
             std::cout << number << " " << std::endl;
         }
@@ -44,9 +44,18 @@ int main(void) {
 
         input_get(input_int, input);
 
+        // 处理输入
 
 
-    } while(input != "q");
+        // 判断游戏进程
+
+
+
+
+        
+
+
+    }while(input != "q");
 
 
     }while(input != "q" ); // 重复游戏选项（未完成）

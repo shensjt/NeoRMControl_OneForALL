@@ -13,18 +13,21 @@ private:
     const std::string SUIT[4] = { "♠", "♥", "♣", "♦" };
     const std::string NUM[14] = {"0", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
     const std::string JOKER[1] = {"灰色小丑"}; 
-    const int SCORE[10] = {300,400}; // 最大分数
+    const int SCORE[10] = {300,400,500,600,700,800,900,1000,1100,1200}; // 最大分数
 
     //
-
+    int ROUND = 0; // 第几轮
     int playcount = 3; // 剩余出牌次数
     int discardcount = 3; // 弃牌次数
 
     int num[8] = { 0 };
     std::string suit[8] = { " " };
 
-    std::vector<int> discard_num; // 暂存已经出现的牌 （需要清空的方法）
+    std::vector<int> discard_num; // 弃牌区 （需要清空的方法）小轮结束后清除
     std::vector<std::string> discard_suit;
+    std::vector<int> usecard_num; // 使用牌 （需要清空的方法）打出一次手牌后清除
+    std::vector<std::string> usecard_suit;
+
 
     int score;
 public:
@@ -69,14 +72,16 @@ public:
     int get_score(){
         return score;
     }
-
+    int get_SCORE(int i){
+        return SCORE[i];
+    }
 
     // 选择卡牌
     void reset_num(int i) {
         num[i] = 0;
     }
 
-    // 清空废牌区
+    // 清空废牌区,得分,暂存的打出手牌
     void newgame(){
         discard_suit.clear();
         discard_num.clear();
@@ -90,7 +95,70 @@ public:
 
     }
 
-    //test
+    // 增加使用牌
+    void add_usecard(int i){
+        usecard_num.push_back(num[i]);
+        usecard_suit.push_back(suit[i]);
+    }
+    // 清除使用牌
+    void clear_usecard(){
+        usecard_num.clear();
+        usecard_suit.clear();
+    }
+
+    // 牌型检测
+    int check_type(const std::vector<int>& input_int){
+        if(input_int.size() >= 5){
+            for(int i = 0; i < 4; i++){
+                for(int x = 0; x < input_int.size(); x++){
+                    
+                
+                }   
+            }
+        }
+    }
+
+    //窗口________________________________________
+    void window() {
+
+
+    switch (3)
+    {
+
+    case 1:
+
+        break;
+
+    case 2:
+
+        break;
+
+    default:
+        std::cout << "__________________" << std::endl;
+        std::cout << "目前拥有的小丑牌：" << std::endl;
+        std::cout << "剩余出牌次数：" << std::endl;
+        std::cout << "当前分数："<< score <<"             "<< "目标分数" << SCORE[ROUND] << std::endl;
+        std::cout << "当前手牌：";
+        for (int i = 0; i < 8; i++) {
+            std::cout << suit[i] << num[i] << " ";
+        }
+        std::cout << std::endl;
+        std::cout << "序号：";
+        for (int i = 0; i < 8; i++) {
+            std::cout << i+1;
+        }
+        std::cout << std::endl;
+
+        // test
+        test();
+
+    }
+
+
+}
+
+
+    //test——————————————————————————
     void test(){
         for(size_t i = 0 ;i < discard_num.size() ;i++){
             std::cout << discard_suit[i] << ":" << discard_num[i] << " ";
@@ -155,13 +223,13 @@ void input_get(std::vector<int>& input_int, std::string& input){
 
             break;
         }
-        // 输入分析与计算 || 判断胜负 || 调整界面
+        // 增加使用和弃牌，以及重置手牌
         for(int number : input_int){
+            card.add_usecard(number-1);
             card.add_discard(number-1);
             card.reset_num(number-1);
+
         }
-
-
 
 }
 
@@ -175,55 +243,11 @@ void clearScreen() {
     std::cout.flush();
 #endif
 }
-//窗口________________________________________
-void window() {
 
-
-    switch (3)
-    {
-
-    case 1:
-
-        break;
-
-    case 2:
-
-        break;
-
-    default:
-        std::cout << "__________________" << std::endl;
-        std::cout << "目前拥有的小丑牌：" << std::endl;
-        std::cout << "剩余出牌次数：" << std::endl;
-        std::cout << "当前分数："<< card.get_score() <<"             "<< "目标分数" << std::endl;
-        std::cout << "当前手牌：";
-        for (int i = 0; i < 8; i++) {
-            std::cout << card.get_suit(i) << card.get_num(i) << " ";
-        }
-        std::cout << std::endl;
-        std::cout << "序号：";
-        for (int i = 0; i < 8; i++) {
-            std::cout << i+1;
-        }
-        std::cout << std::endl;
-
-        // test
-        card.test();
-
-    }
-
-
-}
 //_______________________________________________
 void calculate(const std::vector<int>& input_int){
 
-    for(int number : input_int ){
-
-
-
-
-
-
-    }
+    // 同花 顺子 同花顺
 
 }
 
