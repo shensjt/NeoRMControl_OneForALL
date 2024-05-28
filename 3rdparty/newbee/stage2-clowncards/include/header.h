@@ -258,7 +258,7 @@ class CARD
             }
 
             // 弃牌不足
-            if (discardcount == 0) {
+            if (discardcount == 0 && is_use == false) {
                 std::cout << "您已经没有弃牌次数了，请重新选择" << std::endl;
                 continue;
             }
