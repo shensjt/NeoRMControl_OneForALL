@@ -14,7 +14,8 @@ class CARD
     const int SCORE[10] = { 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200 };  // 最大分数
 
     //
-    int ROUND = 0;         // 第几轮
+    int WINDOW = 1;
+    int ROUND = 1;         // 第几轮
     int playcount = 3;     // 剩余出牌次数
     int discardcount = 3;  // 弃牌次数
 
@@ -113,15 +114,23 @@ class CARD
 
     // 窗口________________________________________
     void window() {
-        switch (3) {
-            case 1: break;
+        switch (WINDOW) {
+            case 1:
+                std::cout << "__________________" << std::endl;
+                std::cout << "您的有效输出是：" << std::endl;
+                std::cout << "目前拥有的小丑牌：" << std::endl;
+                std::cout << "剩余出牌次数：" << playcount << "       " << "弃牌次数：" << discardcount << std::endl;
+                std::cout << "当前分数：" << score << "             " << "目标分数" << SCORE[ROUND] << std::endl;
+                std::cout << "当前手牌：";
+
+                break;
 
             case 2: break;
 
             default:
                 std::cout << "__________________" << std::endl;
                 std::cout << "目前拥有的小丑牌：" << std::endl;
-                std::cout << "剩余出牌次数：" << std::endl;
+                std::cout << "剩余出牌次数：" << playcount << "       " << "弃牌次数：" << discardcount << std::endl;
                 std::cout << "当前分数：" << score << "             " << "目标分数" << SCORE[ROUND] << std::endl;
                 std::cout << "当前手牌：";
                 for (int i = 0; i < 8; i++) {
@@ -141,68 +150,67 @@ class CARD
         }
     }
 
-
     // 输入_________________________________________
 
-void input_get(std::vector<int>& input_int, std::string& input) {
-    while (true) {
-        bool positive = false;
-        bool negative = false;
-        bool check_isinput = true;
-        input_int.clear();
-        std::getline(std::cin, input);
-        std::istringstream iss(input);
-        int number;
+    void input_get(std::vector<int>& input_int, std::string& input) {
+        while (true) {
+            bool positive = false;
+            bool negative = false;
+            bool check_isinput = true;
+            input_int.clear();
+            std::getline(std::cin, input);
+            std::istringstream iss(input);
+            int number;
 
-        if (input == "q") {
+            if (input == "q") {
+                break;
+            }
+
+            while (iss >> number) {
+                input_int.push_back(number);
+
+                // 判定输入数字的范围（具体实际情况还没确定） 全负数，全正数
+                if (number > 8) {
+                    check_isinput = false;
+                    break;
+                }
+
+                // 确保全正 或 全负数
+                if (number > 0) {
+                    positive = true;
+                } else {  // 0 在之前已经排除过
+                    negative = true;
+                }
+
+                if (positive && negative) {
+                    check_isinput = false;
+                    break;
+                }
+
+                if (iss.peek() != ' ' && !iss.eof()) {
+                    check_isinput = false;
+                    break;
+                }
+            }
+
+            if (!iss.eof()) {
+                check_isinput = false;
+            }
+
+            if (check_isinput == false) {
+                std::cout << "输入错误，请重新输入" << std::endl;
+                continue;
+            }
+
             break;
         }
-
-        while (iss >> number) {
-            input_int.push_back(number);
-
-            // 判定输入数字的范围（具体实际情况还没确定） 全负数，全正数
-            if (number > 8) {
-                check_isinput = false;
-                break;
-            }
-
-            // 确保全正 或 全负数
-            if (number > 0) {
-                positive = true;
-            } else {  // 0 在之前已经排除过
-                negative = true;
-            }
-
-            if (positive && negative) {
-                check_isinput = false;
-                break;
-            }
-
-            if (iss.peek() != ' ' && !iss.eof()) {
-                check_isinput = false;
-                break;
-            }
+        // 增加使用和弃牌，以及重置手牌
+        for (int number : input_int) {
+            add_usecard(number - 1);
+            add_discard(number - 1);
+            reset_num(number - 1);
         }
-
-        if (!iss.eof()) {
-            check_isinput = false;
-        }
-
-        if (check_isinput == false) {
-            std::cout << "输入错误，请重新输入" << std::endl;
-            continue;
-        }
-
-        break;
     }
-    // 增加使用和弃牌，以及重置手牌
-    for (int number : input_int) {
-        add_usecard(number - 1);
-        add_discard(number - 1);
-        reset_num(number - 1);
-    }
-}
 
 } card;
 
