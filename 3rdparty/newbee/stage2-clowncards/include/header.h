@@ -13,7 +13,13 @@ private:
     const std::string SUIT[4] = { "♠", "♥", "♣", "♦" };
     const std::string NUM[14] = {"0", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
     const std::string JOKER[1] = {"灰色小丑"}; 
-    
+    const int SCORE[10] = {300,400}; // 最大分数
+
+    //
+
+    int playcount = 3; // 剩余出牌次数
+    int discardcount = 3; // 弃牌次数
+
     int num[8] = { 0 };
     std::string suit[8] = { " " };
 
@@ -70,14 +76,11 @@ public:
         num[i] = 0;
     }
 
-    //  清空分数
-    void reset_score(){
-        score = 0;
-    }
     // 清空废牌区
-    void reset_discard(){
+    void newgame(){
         discard_suit.clear();
         discard_num.clear();
+        score = 0;
     }
 
     // 增加弃牌区

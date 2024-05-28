@@ -25,8 +25,8 @@ int main(void) {
     std::vector<int> input_int; // 输入值处理后得到整数
     std::string input; // 输入的存放
     do{
-        card.reset_discard();
-        card.reset_score();
+        card.newgame(); // 初始化基本设置
+        
     do{
         // 刷新屏幕
         clearScreen();
