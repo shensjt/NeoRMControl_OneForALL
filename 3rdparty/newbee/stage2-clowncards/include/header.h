@@ -16,7 +16,7 @@ class CARD
     int ROUND = 0;  // 第几轮，跟小回合一起变化，不需要清除
 
     bool is_over = false;  // 游戏结束标志
-    int WINDOW = 1;
+    int WINDOW = 0;
 
     int playcount = 3;             // 剩余出牌次数 ，小轮结束后重置
     int discardcount = 3;          // 弃牌次数
