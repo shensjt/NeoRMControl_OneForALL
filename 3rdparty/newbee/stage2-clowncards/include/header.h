@@ -282,7 +282,7 @@ class CARD
 } card;
 
 void clearScreen() {
-    system("cls");
+   std::cout << "\033[2J\033[1;1H";
 
 }
 
