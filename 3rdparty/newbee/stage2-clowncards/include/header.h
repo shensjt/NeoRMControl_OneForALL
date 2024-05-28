@@ -96,6 +96,7 @@ class CARD
         }
     // 新一回合，清空废牌区,得分,暂存的打出手牌
     void new_round() {
+        ROUND++;
         discard_suit.clear();
         discard_num.clear();
         playcount = 3;
@@ -161,8 +162,6 @@ class CARD
         if (is_over) {
             WINDOW = 2;
         }
-        
-        ROUND++;
 
         return false;
     }
