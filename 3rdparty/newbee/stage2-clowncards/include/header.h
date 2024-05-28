@@ -121,6 +121,7 @@ class CARD
                 temp_max = i;
             }
         }
+        WINDOW = 1;
         return temp_max;
     }
 }
