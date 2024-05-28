@@ -282,12 +282,8 @@ class CARD
 } card;
 
 void clearScreen() {
-#ifdef _WIN32
     system("cls");
-#else
-    std::cout << "\033[2J\033[1;1H";
-    std::cout.flush();
-#endif
+
 }
 
 //_______________________________________________
