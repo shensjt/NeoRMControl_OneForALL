@@ -241,11 +241,6 @@ class CARD
                 } else {
                     is_use = positive;
                 }
-                // 弃牌不足
-                if (discardcount == 0) {
-                    std::cout << "您已经没有弃牌次数了，请重新选择" << std::endl;
-                    continue;
-                }
 
                 if (iss.peek() != ' ' && !iss.eof()) {
                     check_isinput = false;
@@ -261,6 +256,13 @@ class CARD
                 std::cout << "输入错误，请重新输入" << std::endl;
                 continue;
             }
+
+            // 弃牌不足
+            if (discardcount == 0) {
+                std::cout << "您已经没有弃牌次数了，请重新选择" << std::endl;
+                continue;
+            }
+
             break;
         }
         // 处理输入的负数
