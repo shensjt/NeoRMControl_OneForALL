@@ -42,7 +42,7 @@ int main(void) {
 
         // 输入
 
-        input_get(input_int, input);
+        card.input_get(input_int, input);
 
         // 处理输入
 
