@@ -32,6 +32,7 @@ int main(void) {
                 char check;
                 std::cin >> check;
                 if (check == 'y') {
+                    card.new_game();
                     break;
                 } else {
                     input = "q";

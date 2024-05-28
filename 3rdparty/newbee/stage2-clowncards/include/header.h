@@ -13,11 +13,13 @@ class CARD
     const std::string JOKER[1] = { "灰色小丑" };
     const int SCORE[10] = { 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200 };  // 最大分数
 
-    int ROUND = 0;  // 第几轮，跟小回合一起变化，不需要清除
     
-    bool is_use;
-    bool is_over = false;  // 游戏结束标志
-    int WINDOW = 0;
+    
+    bool is_use; //无需重置
+    
+    int ROUND = 0;  // 游戏重新开始时重置
+    bool is_over = false;  // 游戏结束标志，游戏结束时在选择继续游戏后重置
+    int WINDOW = 0; // 重开游戏时重置
 
     int playcount = 3;             // 剩余出牌次数 ，小轮结束后重置
     int discardcount = 3;          // 弃牌次数
@@ -85,6 +87,13 @@ class CARD
         num[i] = 0;
     }
 
+    // 新的一局
+
+    void new_game() {
+        ROUND = 0;
+        is_over = false;
+        WINDOW = 0;
+        }
     // 新一回合，清空废牌区,得分,暂存的打出手牌
     void new_round() {
         discard_suit.clear();
