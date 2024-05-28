@@ -17,7 +17,7 @@ class CARD
     
     bool is_use; //无需重置
     
-    int ROUND = 0;  // 游戏重新开始时重置
+    int ROUND = -1;  // 游戏重新开始时重置
     bool is_over = false;  // 游戏结束标志，游戏结束时在选择继续游戏后重置
     int WINDOW = 0; // 重开游戏时重置
 
@@ -90,7 +90,7 @@ class CARD
     // 新的一局
 
     void new_game() {
-        ROUND = 0;
+        ROUND = -1;
         is_over = false;
         WINDOW = 0;
         }
