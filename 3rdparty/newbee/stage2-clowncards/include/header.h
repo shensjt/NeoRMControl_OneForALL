@@ -136,6 +136,7 @@ class CARD
 
                 // test
                 for (size_t i = 0; i < discard_num.size(); i++) {
+                    std::cout << discard_suit[i] << ":" << discard_num[i] << " ";
                 }
         }
     }
