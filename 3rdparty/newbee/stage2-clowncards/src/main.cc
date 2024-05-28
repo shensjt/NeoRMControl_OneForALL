@@ -42,9 +42,9 @@ int main(void) {
             // 输入
             card.new_usecard();
             card.input_get(input_int, input);
-            card.score_update();
-            // 处理输入
-            card.anlysis_is_over();
+            if(card.score_update()){
+                break;
+            }
 
         } while (input != "q");  // 更换小回合判断条件
 

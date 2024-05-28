@@ -139,8 +139,32 @@ class CARD
 
         return 0;
     }
-    void score_update() {
-        score = check_type();
+
+    // 更新分数以及 返回值判断是否进入下一回合
+    bool score_update() {
+        score += check_type();
+
+        if (is_use) {
+            playcount--;
+        } else {
+            discardcount--;
+        }
+
+        if(score >= SCORE[ROUND] ){
+            return true;
+        }else{
+            if(playcount == 0 ){
+                is_over = true;
+            }
+        }
+
+        if (is_over) {
+            WINDOW = 2;
+        }
+        
+        ROUND++;
+
+        return false;
     }
     // 窗口________________________________________
     void window() {
@@ -253,27 +277,7 @@ class CARD
         }
     }
 
-    void anlysis_is_over() {
-        if (is_use) {
-            playcount--;
-        } else {
-            discardcount--;
-        }
-
-        if (score < SCORE[ROUND]) {
-            is_over = true;
-        } else {
-            if (discardcount == 0 || playcount == 0) {
-                is_over = true;
-            }
-        }
-
-        if (is_over) {
-            WINDOW = 2;
-        }
-
-        ROUND++;
-    }
+    
 } card;
 
 void clearScreen() {
