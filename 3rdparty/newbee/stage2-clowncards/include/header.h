@@ -13,15 +13,13 @@ class CARD
     const std::string JOKER[1] = { "灰色小丑" };
     const int SCORE[10] = { 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200 };  // 最大分数
 
-    
-    
-    bool is_use = false; 
-    int ROUND = -1;  // 游戏重新开始时重置
+    bool is_use = false;
+    int ROUND = -1;        // 游戏重新开始时重置
     bool is_over = false;  // 游戏结束标志，游戏结束时在选择继续游戏后重置
-    int WINDOW = 0; // 重开游戏时重置
+    int WINDOW = 0;        // 重开游戏时重置
 
     int playcount = 3;             // 剩余出牌次数 ，小轮结束后重置
-    int discardcount = 3;          // 弃牌次数
+    int discardcount = 4;          // 弃牌次数
     std::vector<int> discard_num;  // 弃牌区 （需要清空的方法）小轮结束后清除
     std::vector<std::string> discard_suit;
     int score;  // 当前分数,小轮结束后重置
@@ -29,7 +27,6 @@ class CARD
     int num[8] = { 0 };             // 手牌点数 （在INI_CARD中更新）
     std::string suit[8] = { " " };  // 手牌花色
 
-    
     std::vector<int> usecard_num;  // 使用牌 （需要清空的方法）打出一次手牌后清除
     std::vector<std::string> usecard_suit;
     int temp_score;  // 临时分数，打出一次手牌后重置
@@ -93,14 +90,14 @@ class CARD
         is_over = false;
         is_use = false;
         WINDOW = 0;
-        }
+    }
     // 新一回合，清空废牌区,得分,暂存的打出手牌
     void new_round() {
         ROUND++;
         discard_suit.clear();
         discard_num.clear();
         playcount = 3;
-        discardcount = 3;
+        discardcount = 4;
         score = 0;
     }
     // 新一次出牌
@@ -120,7 +117,6 @@ class CARD
         usecard_num.push_back(num[i]);
         usecard_suit.push_back(suit[i]);
     }
-    
 
     // 牌型检测
     int check_type() {
@@ -151,10 +147,10 @@ class CARD
             discardcount--;
         }
 
-        if(score >= SCORE[ROUND] ){
+        if (score >= SCORE[ROUND]) {
             return true;
-        }else{
-            if(playcount == 0 ){
+        } else {
+            if (playcount == 0) {
                 is_over = true;
             }
         }
@@ -245,6 +241,11 @@ class CARD
                 } else {
                     is_use = positive;
                 }
+                // 弃牌不足
+                if (discardcount == 0) {
+                    std::cout << "您已经没有弃牌次数了，请重新选择" << std::endl;
+                    continue;
+                }
 
                 if (iss.peek() != ' ' && !iss.eof()) {
                     check_isinput = false;
@@ -276,7 +277,6 @@ class CARD
         }
     }
 
-    
 } card;
 
 void clearScreen() {
