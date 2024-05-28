@@ -141,9 +141,8 @@ class CARD
         }
     }
 
-} card;
 
-// 输入_________________________________________
+    // 输入_________________________________________
 
 void input_get(std::vector<int>& input_int, std::string& input) {
     while (true) {
@@ -199,11 +198,13 @@ void input_get(std::vector<int>& input_int, std::string& input) {
     }
     // 增加使用和弃牌，以及重置手牌
     for (int number : input_int) {
-        card.add_usecard(number - 1);
-        card.add_discard(number - 1);
-        card.reset_num(number - 1);
+        add_usecard(number - 1);
+        add_discard(number - 1);
+        reset_num(number - 1);
     }
 }
+
+} card;
 
 void clearScreen() {
 #ifdef _WIN32
