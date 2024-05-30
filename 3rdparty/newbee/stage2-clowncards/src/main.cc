@@ -20,7 +20,9 @@ int main(void) {
             
             // 初始化与更新
             card.INI_CARD();
-            
+            if(card.score_update()){
+                break;
+            }
             // 界面展示
             card.window();
             for (int number : input_int) {
@@ -31,6 +33,7 @@ int main(void) {
             if (card.get_is_over() == true) {
                 char check;
                 std::cin >> check;
+                getchar();
                 if (check == 'y') {
                     card.new_game();
                     break;
@@ -42,9 +45,6 @@ int main(void) {
             // 输入
             card.new_usecard();
             card.input_get(input_int, input);
-            if(card.score_update()){
-                break;
-            }
 
         } while (input != "q");  // 更换小回合判断条件
 

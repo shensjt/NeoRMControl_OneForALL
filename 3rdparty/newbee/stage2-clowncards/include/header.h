@@ -34,6 +34,7 @@ class CARD
    public:
     // 设置点数和花色
     void INI_CARD() {
+        
         for (int i = 0; i < 8; i++) {
             if (num[i] == 0) {
                 num[i] = 1 + rand() % 13;
