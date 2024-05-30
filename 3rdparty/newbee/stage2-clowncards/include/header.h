@@ -105,7 +105,6 @@ class CARD
     void new_usecard() {
         usecard_num.clear();
         usecard_suit.clear();
-        temp_score = 0;
     }
     // 增加弃牌区
     void add_discard(int i) {
@@ -121,18 +120,20 @@ class CARD
 
     // 牌型检测
     int check_type() {
+        temp_score = 0;
+
         if (usecard_num.size() >= 5) {
             // 同花
             for (int i = 0; i < 4; i++) {
             }
-            int temp_max = 0;
+            
             for (int i : usecard_num) {
-                if (i > temp_max) {
-                    temp_max = i;
+                if (i > temp_score) {
+                    temp_score = i;
                 }
             }
             WINDOW = 1;
-            return temp_max;
+            return temp_score;
         }
 
         return 0;
