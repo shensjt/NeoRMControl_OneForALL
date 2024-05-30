@@ -34,7 +34,7 @@ class CARD
    public:
     // 设置点数和花色
     void INI_CARD() {
-        
+
         for (int i = 0; i < 8; i++) {
             if (num[i] == 0) {
                 num[i] = 1 + rand() % 13;
@@ -168,7 +168,7 @@ class CARD
             case 1:
                 std::cout << "__________________" << std::endl;
                 std::cout << "您打出了" << "   " << "您的有效输出是：" << "   !!!     " << std::endl;
-                std::cout << "此次出牌得分是：" << " !!!  " << std::endl;
+                std::cout << "此次出牌得分是：" << temp_score << std::endl;
                 std::cout << "______________________________" << "  !!!    " << std::endl;
                 break;
 
@@ -176,9 +176,10 @@ class CARD
                 std::cout << "您输掉了游戏！" << std::endl;
                 std::cout << "如果要继续请输入y,其余输入将退出游戏。" << std::endl;
                 break;
+        }
 
-            default:
-                std::cout << "__________________" << std::endl;
+        if(!is_over){
+            std::cout << "__________________" << std::endl;
                 std::cout << "当前回合数：" << ROUND + 1 << std::endl;
                 std::cout << "目前拥有的小丑牌：" << std::endl;
                 std::cout << "剩余出牌次数：" << playcount << "       " << "弃牌次数：" << discardcount << std::endl;
