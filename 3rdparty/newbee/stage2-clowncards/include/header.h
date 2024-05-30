@@ -296,3 +296,5 @@ void calculate(const std::vector<int>& input_int) {
 // 小丑牌，目标分，
 
 // 界面设计
+
+// 分数的计算存在问题
