@@ -47,7 +47,7 @@ int main(void) {
             card.input_get(input_int, input);
 
         } while (input != "q");  // 更换小回合判断条件
-
+        card.new_round( );
     } while (input != "q");  // 重复游戏选项（未完成）
 
     return 0;
