@@ -291,7 +291,8 @@ class CARD
 
 
 
-            score = chip * bet;
+            temp_score = chip * bet;
+            score += temp_score;
             // 分析分数
             if (is_use) {
                 playcount--;
