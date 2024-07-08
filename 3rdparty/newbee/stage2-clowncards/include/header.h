@@ -160,6 +160,9 @@ class CARD
                         }
                     }
                 }
+            }else{
+                is_flush = false;
+                is_straight = false;
             }
 
             // 对子类
@@ -421,9 +424,7 @@ void clearScreen() {
 }
 
 //_______________________________________________
-void calculate(const std::vector<int>& input_int) {
-    // 同花 顺子 同花顺
-}
+
 
 // 还差 计算分数 （小丑牌 的规则）
 
