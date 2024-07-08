@@ -294,6 +294,8 @@ class CARD
 
             if (is_over) {
                 WINDOW = 2;
+            }else{
+                WINDOW = 1;
             }
 
             return false;
