@@ -24,8 +24,7 @@ class CARD
     std::vector<std::string> discard_suit;
     int score;  // 当前分数,小轮结束后重置
 
-    int chip = 0;
-    int bet = 0;
+    
 
     int num[8] = { 0 };             // 手牌点数 （在INI_CARD中更新）
     std::string suit[8] = { " " };  // 手牌花色
@@ -33,7 +32,8 @@ class CARD
     std::vector<int> usecard_num;  // 使用牌 （需要清空的方法）打出一次手牌后清除
     std::vector<std::string> usecard_suit;
     int temp_score;  // 临时分数，打出一次手牌后重置
-
+    int chip = 0;
+    int bet = 0;
    public:
     // 设置点数和花色
     void INI_CARD() {
@@ -120,27 +120,6 @@ class CARD
         usecard_suit.push_back(suit[i]);
     }
 
-    // 牌型检测
-    int check_type() {
-        temp_score = 0;
-
-        if (usecard_num.size() >= 5) {
-            // 同花
-            for (int i = 0; i < 4; i++) {
-            }
-
-            for (int i : usecard_num) {
-                if (i > temp_score) {
-                    temp_score = i;
-                }
-            }
-            WINDOW = 1;
-            return temp_score;
-        }
-
-        return 0;
-    }
-
     // 更新分数以及 返回值判断是否进入下一回合
     bool score_update() {
         // 整理使用牌
@@ -161,7 +140,8 @@ class CARD
             // 分数计算
             bool is_flush = true;
             bool is_straight = true;
-
+            chip = 0;
+            bet = 0;
             int two_1 = 0;
             int two_2   = 0;
             int three = 0;
@@ -378,7 +358,7 @@ class CARD
                 input_int.push_back(number);
 
                 // 判定输入数字的范围（具体实际情况还没确定） 全负数，全正数
-                if (number > 5) {
+                if (number > 8 || input_int.size() > 5) {
                     check_isinput = false;
                     break;
                 }
