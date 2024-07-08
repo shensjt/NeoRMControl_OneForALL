@@ -251,6 +251,7 @@ class CARD
             else if(two_1){
                 if( two_1 >= 11 && two_1 <= 13){two_1 = 10;}else if(two_1 == 1){two_1 = 11;}
                 chip += 10;
+                chip += two_1 * 2;
                 bet += 2;
             }
             else{
