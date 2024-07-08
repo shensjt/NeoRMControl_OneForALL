@@ -24,8 +24,6 @@ class CARD
     std::vector<std::string> discard_suit;
     int score;  // 当前分数,小轮结束后重置
 
-    
-
     int num[8] = { 0 };             // 手牌点数 （在INI_CARD中更新）
     std::string suit[8] = { " " };  // 手牌花色
 
@@ -34,6 +32,7 @@ class CARD
     int temp_score;  // 临时分数，打出一次手牌后重置
     int chip = 0;
     int bet = 0;
+
    public:
     // 设置点数和花色
     void INI_CARD() {
@@ -93,6 +92,7 @@ class CARD
         is_over = false;
         is_use = false;
         WINDOW = 0;
+        temp_score = 0;
     }
     // 新一回合，清空废牌区,得分,暂存的打出手牌
     void new_round() {
@@ -144,7 +144,7 @@ class CARD
             chip = 0;
             bet = 0;
             int two_1 = 0;
-            int two_2   = 0;
+            int two_2 = 0;
             int three = 0;
             int four = 0;
             int index = 1;
@@ -161,40 +161,40 @@ class CARD
                         }
                     }
                 }
-            }else{
+            } else {
                 is_flush = false;
                 is_straight = false;
             }
 
             // 对子类
             // 设计几个变量来存储两，三，四。
-            for(int i = 0; i < usecard_num.size() - 1; i++) {
+            for (int i = 0; i < usecard_num.size() - 1; i++) {
                 int temp = usecard_num[0];
-                if(index == 2){
-                    if(two_1 == 0){
+                if (index == 2) {
+                    if (two_1 == 0) {
                         two_1 = temp;
-                    }else{
+                    } else {
                         two_2 = temp;
                     }
                 }
-                if(index == 3){
-                    if(two_2 == 0){
+                if (index == 3) {
+                    if (two_2 == 0) {
                         two_1 = 0;
-                        three = temp; 
-                    }else{
+                        three = temp;
+                    } else {
                         two_2 = 0;
                         three = 0;
                     }
                 }
 
-                if(index == 4){
+                if (index == 4) {
                     three = 0;
                     four = temp;
                 }
 
-                if(temp == usecard_num[i + 1]){
+                if (temp == usecard_num[i + 1]) {
                     index++;
-                }else{
+                } else {
                     index = 1;
                     temp = usecard_num[i + 1];
                 }
@@ -203,68 +203,104 @@ class CARD
             // 计算分数
             // chip and bet 还未写重置
             // 一牌型的基础倍率和筹码
-            if(is_flush && is_straight){
-                
-                for(int num : usecard_num){
-                    if( num >= 11 && num <= 13){num = 10;}else if(num == 1){num = 11;}
+            if (is_flush && is_straight) {
+                for (int num : usecard_num) {
+                    if (num >= 11 && num <= 13) {
+                        num = 10;
+                    } else if (num == 1) {
+                        num = 11;
+                    }
                     chip += num;
                 }
                 chip += 100;
                 bet += 8;
-            }else if(four){
-                if( four >= 11 && four <= 13){four = 10;}else if(four == 1){four = 11;}
+            } else if (four) {
+                if (four >= 11 && four <= 13) {
+                    four = 10;
+                } else if (four == 1) {
+                    four = 11;
+                }
                 chip += 60;
                 chip += four * 4;
                 bet += 7;
-            }else if(three && two_1){
-                if( three >= 11 && three <= 13){three = 10;}else if(three == 1){three = 11;}
-                if( two_1 >= 11 && two_1 <= 13){two_1 = 10;}else if(two_1 == 1){two_1 = 11;}
+            } else if (three && two_1) {
+                if (three >= 11 && three <= 13) {
+                    three = 10;
+                } else if (three == 1) {
+                    three = 11;
+                }
+                if (two_1 >= 11 && two_1 <= 13) {
+                    two_1 = 10;
+                } else if (two_1 == 1) {
+                    two_1 = 11;
+                }
                 chip += 40;
                 chip += (three * 3 + two_1 * 2);
                 bet += 4;
-            }else if(is_flush){
-                for(int num : usecard_num){
-                    if( num >= 11 && num <= 13){num = 10;}else if(num == 1){num = 11;}
+            } else if (is_flush) {
+                for (int num : usecard_num) {
+                    if (num >= 11 && num <= 13) {
+                        num = 10;
+                    } else if (num == 1) {
+                        num = 11;
+                    }
                     chip += num;
                 }
                 chip += 35;
                 bet += 4;
-            }else if(is_straight){
-                for(int num : usecard_num){
-                    if( num >= 11 && num <= 13){num = 10;}else if(num == 1){num = 11;}
+            } else if (is_straight) {
+                for (int num : usecard_num) {
+                    if (num >= 11 && num <= 13) {
+                        num = 10;
+                    } else if (num == 1) {
+                        num = 11;
+                    }
                     chip += num;
                 }
                 chip += 30;
                 bet += 4;
-            }else if(three){
-                if( three >= 11 && three <= 13){three = 10;}else if(three == 1){three = 11;}
+            } else if (three) {
+                if (three >= 11 && three <= 13) {
+                    three = 10;
+                } else if (three == 1) {
+                    three = 11;
+                }
                 chip += 30;
                 chip += three * 3;
                 bet += 3;
-            }
-            else if(two_1 && two_2){
-                if( two_1 >= 11 && two_1 <= 13){two_1 = 10;}else if(two_1 == 1){two_1 = 11;}
-                if( two_2 >= 11 && two_2 <= 13){two_2 = 10;}else if(two_2 == 1){two_2 = 11;}
+            } else if (two_1 && two_2) {
+                if (two_1 >= 11 && two_1 <= 13) {
+                    two_1 = 10;
+                } else if (two_1 == 1) {
+                    two_1 = 11;
+                }
+                if (two_2 >= 11 && two_2 <= 13) {
+                    two_2 = 10;
+                } else if (two_2 == 1) {
+                    two_2 = 11;
+                }
                 chip += 20;
-                chip += (two_1 * 2 + two_2*2);
+                chip += (two_1 * 2 + two_2 * 2);
                 bet += 2;
-            }
-            else if(two_1){
-                if( two_1 >= 11 && two_1 <= 13){two_1 = 10;}else if(two_1 == 1){two_1 = 11;}
+            } else if (two_1) {
+                if (two_1 >= 11 && two_1 <= 13) {
+                    two_1 = 10;
+                } else if (two_1 == 1) {
+                    two_1 = 11;
+                }
                 chip += 10;
                 chip += two_1 * 2;
                 bet += 2;
-            }
-            else{
+            } else {
                 int max_tem = 0;
-                for(int num : usecard_num){
-                    if(num == 1){
+                for (int num : usecard_num) {
+                    if (num == 1) {
                         max_tem = 11;
                         break;
                     }
-                    if(num > max_tem){
+                    if (num > max_tem) {
                         max_tem = num;
-                        if(max_tem >10){
+                        if (max_tem > 10) {
                             max_tem = 10;
                         }
                     }
@@ -273,8 +309,6 @@ class CARD
                 chip += max_tem;
                 bet += 1;
             }
-
-
 
             temp_score = chip * bet;
             score += temp_score;
@@ -295,7 +329,7 @@ class CARD
 
             if (is_over) {
                 WINDOW = 2;
-            }else{
+            } else {
                 WINDOW = 1;
             }
 
@@ -305,7 +339,6 @@ class CARD
     // 窗口________________________________________
     void window() {
         switch (WINDOW) {
-
             case 2:
                 std::cout << "您输掉了游戏！" << std::endl;
                 std::cout << "如果要继续请输入y,其余输入将退出游戏。" << std::endl;
@@ -316,7 +349,7 @@ class CARD
             std::cout << "__________________" << std::endl;
             std::cout << "当前回合数：" << ROUND + 1 << std::endl;
             std::cout << "目前拥有的小丑牌：" << std::endl;
-            std::cout << "上一回合得分："<< temp_score << std::endl;
+            std::cout << "上一回合得分：" << temp_score << std::endl;
             std::cout << "剩余出牌次数：" << playcount << "       " << "弃牌次数：" << discardcount << std::endl;
             std::cout << "当前分数：" << score << "             " << "目标分数" << SCORE[ROUND] << std::endl;
             std::cout << "当前手牌：" << std::endl;
@@ -423,7 +456,6 @@ void clearScreen() {
 }
 
 //_______________________________________________
-
 
 // 还差 计算分数 （小丑牌 的规则）
 
