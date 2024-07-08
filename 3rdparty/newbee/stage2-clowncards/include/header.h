@@ -24,6 +24,9 @@ class CARD
     std::vector<std::string> discard_suit;
     int score;  // 当前分数,小轮结束后重置
 
+    int chip = 0;
+    int bet = 0;
+
     int num[8] = { 0 };             // 手牌点数 （在INI_CARD中更新）
     std::string suit[8] = { " " };  // 手牌花色
 
@@ -34,7 +37,6 @@ class CARD
    public:
     // 设置点数和花色
     void INI_CARD() {
-
         for (int i = 0; i < 8; i++) {
             if (num[i] == 0) {
                 num[i] = 1 + rand() % 13;
@@ -126,7 +128,7 @@ class CARD
             // 同花
             for (int i = 0; i < 4; i++) {
             }
-            
+
             for (int i : usecard_num) {
                 if (i > temp_score) {
                     temp_score = i;
@@ -141,27 +143,176 @@ class CARD
 
     // 更新分数以及 返回值判断是否进入下一回合
     bool score_update() {
-        score += check_type();
-
-        if (is_use) {
-            playcount--;
-        } else {
-            discardcount--;
+        // 整理使用牌
+        if (usecard_num.size() != usecard_suit.size()) {
+            std::cout << "使用牌的数量和花色不匹配" << std::endl;
         }
-
-        if (score >= SCORE[ROUND]) {
-            return true;
-        } else {
-            if (playcount == 0) {
-                is_over = true;
+        for (int i = 0; i < usecard_num.size(); i++) {
+            for (int j = 0; j < usecard_num.size() - 1; j++) {
+                if (usecard_num[j] > usecard_num[j + 1]) {
+                    int temp_num = usecard_num[j];
+                    std::string temp_suit = usecard_suit[j];
+                    usecard_num[j] = usecard_num[j + 1];
+                    usecard_suit[j] = usecard_suit[j + 1];
+                    usecard_num[j + 1] = temp_num;
+                    usecard_suit[j + 1] = temp_suit;
+                }
             }
-        }
+            // 分数计算
+            bool is_flush = true;
+            bool is_straight = true;
 
-        if (is_over) {
-            WINDOW = 2;
-        }
+            int two_1 = 0;
+            int two_2   = 0;
+            int three = 0;
+            int four = 0;
+            int index = 1;
+            // 同花顺 同花 顺子
+            if (usecard_num.size() == 5) {
+                // 同花
+                for (int i = 0; i < 4; i++) {
+                    if (usecard_suit[0] != usecard_suit[i]) {
+                        is_flush = false;
+                    }
+                    if (i < 4) {
+                        if (usecard_num[i] != usecard_num[i + 1] - 1) {
+                            is_straight = false;
+                        }
+                    }
+                }
+            }
 
-        return false;
+            // 对子类
+            // 设计几个变量来存储两，三，四。
+            for(int i = 0; i < usecard_num.size() - 1; i++) {
+                int temp = usecard_num[0];
+                if(index == 2){
+                    if(two_1 == 0){
+                        two_1 = temp;
+                    }else{
+                        two_2 = temp;
+                    }
+                }
+                if(index == 3){
+                    if(two_2 == 0){
+                        two_1 = 0;
+                        three = temp; 
+                    }else{
+                        two_2 = 0;
+                        three = 0;
+                    }
+                }
+
+                if(index == 4){
+                    three = 0;
+                    four = temp;
+                }
+
+                if(temp == usecard_num[i + 1]){
+                    index++;
+                }else{
+                    index = 1;
+                    temp = usecard_num[i + 1];
+                }
+            }
+
+            // 计算分数
+            // chip and bet 还未写重置
+            // 一牌型的基础倍率和筹码
+            if(is_flush && is_straight){
+                
+                for(int num : usecard_num){
+                    if( num >= 11 && num <= 13){num = 10;}else if(num == 1){num = 11;}
+                    chip += num;
+                }
+                chip += 100;
+                bet += 8;
+            }else if(four){
+                if( four >= 11 && four <= 13){four = 10;}else if(four == 1){four = 11;}
+                chip += 60;
+                chip += four * 4;
+                bet += 7;
+            }else if(three && two_1){
+                if( three >= 11 && three <= 13){three = 10;}else if(three == 1){three = 11;}
+                if( two_1 >= 11 && two_1 <= 13){two_1 = 10;}else if(two_1 == 1){two_1 = 11;}
+                chip += 40;
+                chip += (three * 3 + two_1 * 2);
+                bet += 4;
+            }else if(is_flush){
+                for(int num : usecard_num){
+                    if( num >= 11 && num <= 13){num = 10;}else if(num == 1){num = 11;}
+                    chip += num;
+                }
+                chip += 35;
+                bet += 4;
+            }else if(is_straight){
+                for(int num : usecard_num){
+                    if( num >= 11 && num <= 13){num = 10;}else if(num == 1){num = 11;}
+                    chip += num;
+                }
+                chip += 30;
+                bet += 4;
+            }else if(three){
+                if( three >= 11 && three <= 13){three = 10;}else if(three == 1){three = 11;}
+                chip += 30;
+                chip += three * 3;
+                bet += 3;
+            }
+            else if(two_1 && two_2){
+                if( two_1 >= 11 && two_1 <= 13){two_1 = 10;}else if(two_1 == 1){two_1 = 11;}
+                if( two_2 >= 11 && two_2 <= 13){two_2 = 10;}else if(two_2 == 1){two_2 = 11;}
+                chip += 20;
+                chip += (two_1 * 2 + two_2*2);
+                bet += 2;
+            }
+            else if(two_1){
+                if( two_1 >= 11 && two_1 <= 13){two_1 = 10;}else if(two_1 == 1){two_1 = 11;}
+                chip += 10;
+                bet += 2;
+            }
+            else{
+                int max_tem = 0;
+                for(int num : usecard_num){
+                    if(num == 1){
+                        max_tem = 11;
+                        break;
+                    }
+                    if(num > max_tem){
+                        max_tem = num;
+                        if(max_tem >10){
+                            max_tem = 10;
+                        }
+                    }
+                }
+                chip += 5;
+                chip += max_tem;
+                bet += 1;
+            }
+
+
+
+            score = chip * bet;
+            // 分析分数
+            if (is_use) {
+                playcount--;
+            } else {
+                discardcount--;
+            }
+
+            if (score >= SCORE[ROUND]) {
+                return true;
+            } else {
+                if (playcount == 0) {
+                    is_over = true;
+                }
+            }
+
+            if (is_over) {
+                WINDOW = 2;
+            }
+
+            return false;
+        }
     }
     // 窗口________________________________________
     void window() {
@@ -179,29 +330,29 @@ class CARD
                 break;
         }
 
-        if(!is_over){
+        if (!is_over) {
             std::cout << "__________________" << std::endl;
-                std::cout << "当前回合数：" << ROUND + 1 << std::endl;
-                std::cout << "目前拥有的小丑牌：" << std::endl;
-                std::cout << "剩余出牌次数：" << playcount << "       " << "弃牌次数：" << discardcount << std::endl;
-                std::cout << "当前分数：" << score << "             " << "目标分数" << SCORE[ROUND] << std::endl;
-                std::cout << "当前手牌：" << std::endl;
-                std::cout << "退出请输入q" << std::endl;
+            std::cout << "当前回合数：" << ROUND + 1 << std::endl;
+            std::cout << "目前拥有的小丑牌：" << std::endl;
+            std::cout << "剩余出牌次数：" << playcount << "       " << "弃牌次数：" << discardcount << std::endl;
+            std::cout << "当前分数：" << score << "             " << "目标分数" << SCORE[ROUND] << std::endl;
+            std::cout << "当前手牌：" << std::endl;
+            std::cout << "退出请输入q" << std::endl;
 
-                for (int i = 0; i < 8; i++) {
-                    std::cout << suit[i] << num[i] << " ";
-                }
-                std::cout << std::endl;
-                std::cout << "序号：";
-                for (int i = 0; i < 8; i++) {
-                    std::cout << i + 1;
-                }
-                std::cout << std::endl;
+            for (int i = 0; i < 8; i++) {
+                std::cout << suit[i] << num[i] << " ";
+            }
+            std::cout << std::endl;
+            std::cout << "序号：";
+            for (int i = 0; i < 8; i++) {
+                std::cout << i + 1;
+            }
+            std::cout << std::endl;
 
-                // test
-                for (size_t i = 0; i < discard_num.size(); i++) {
-                    std::cout << discard_suit[i] << ":" << discard_num[i] << " ";
-                }
+            // test
+            for (size_t i = 0; i < discard_num.size(); i++) {
+                std::cout << discard_suit[i] << ":" << discard_num[i] << " ";
+            }
         }
     }
 
@@ -226,7 +377,7 @@ class CARD
                 input_int.push_back(number);
 
                 // 判定输入数字的范围（具体实际情况还没确定） 全负数，全正数
-                if (number > 8) {
+                if (number > 5) {
                     check_isinput = false;
                     break;
                 }
@@ -285,8 +436,7 @@ class CARD
 } card;
 
 void clearScreen() {
-   std::cout << "\033[2J\033[1;1H";
-
+    std::cout << "\033[2J\033[1;1H";
 }
 
 //_______________________________________________
