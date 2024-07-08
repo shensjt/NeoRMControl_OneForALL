@@ -306,14 +306,6 @@ class CARD
     void window() {
         switch (WINDOW) {
 
-            case 0:
-            case 1:
-                std::cout << "__________________" << std::endl;
-                std::cout << "您打出了" << "   " << "您的有效输出是：" << "   !!!     " << std::endl;
-                std::cout << "此次出牌得分是：" << temp_score << std::endl;
-                std::cout << "______________________________" << "  !!!    " << std::endl;
-                break;
-
             case 2:
                 std::cout << "您输掉了游戏！" << std::endl;
                 std::cout << "如果要继续请输入y,其余输入将退出游戏。" << std::endl;
@@ -324,6 +316,7 @@ class CARD
             std::cout << "__________________" << std::endl;
             std::cout << "当前回合数：" << ROUND + 1 << std::endl;
             std::cout << "目前拥有的小丑牌：" << std::endl;
+            std::cout << "上一回合得分："<< temp_score << std::endl;
             std::cout << "剩余出牌次数：" << playcount << "       " << "弃牌次数：" << discardcount << std::endl;
             std::cout << "当前分数：" << score << "             " << "目标分数" << SCORE[ROUND] << std::endl;
             std::cout << "当前手牌：" << std::endl;
