@@ -305,6 +305,8 @@ class CARD
     // 窗口________________________________________
     void window() {
         switch (WINDOW) {
+
+            case 0:
             case 1:
                 std::cout << "__________________" << std::endl;
                 std::cout << "您打出了" << "   " << "您的有效输出是：" << "   !!!     " << std::endl;
