@@ -102,6 +102,7 @@ class CARD
         playcount = 3;
         discardcount = 4;
         score = 0;
+        temp_score = 0;
     }
     // 新一次出牌
     void new_usecard() {
